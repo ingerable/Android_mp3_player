@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
+import android.view.View;
+import android.widget.TextView;
 
 public class PlaylistsActivity extends AppCompatActivity {
 
@@ -13,36 +15,38 @@ public class PlaylistsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_playlists);
+
+        //get the TextView object to add onClick listener
+        TextView txtViewSongs = (TextView) findViewById(R.id.textView_Songs);
+        TextView txtViewSettings = (TextView) findViewById(R.id.textView_Settings);
+
+        txtViewSongs.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                changeToSongs();
+            }
+        });
+
+        txtViewSettings.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                changeToSettings();
+            }
+        });
     }
 
-    public boolean onTouchEvent(MotionEvent event){
 
-        switch(event.getAction())
-        {
-            case MotionEvent.ACTION_DOWN: // gesture started
-                x1 = event.getX();
-                break;
-            case MotionEvent.ACTION_UP: // gesture ended
-                x2 = event.getX();
-                float diff = x2-x1;
-                if(Math.abs(diff)>Constants.MIN_DISTANCE) // check the minimum distance for the swipe
-                {
-                    if(diff<0) // swapping to settings activity
-                    {
-                        Intent intent = new Intent(this, SettingsActivity.class);
-                        finish();
-                        startActivity(intent);
-                        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
-                    }else{ // swapping to songs activity
-                        Intent intent = new Intent(this, MainActivity.class);
-                        finish();
-                        startActivity(intent);
-                        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
-                    }
-
-                }
-                break;
-        }
-        return super.onTouchEvent(event);
+   //function used to proceed to the transition between 2 activity
+    public void changeToSongs(){
+        Intent intent = new Intent(this, MainActivity.class);
+        finish();
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
     }
+
+    public void changeToSettings(){
+        Intent intent = new Intent(this, SettingsActivity.class);
+        finish();
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+    }
+
 }
