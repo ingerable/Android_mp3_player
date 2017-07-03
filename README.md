@@ -7,10 +7,8 @@ Simple mp3 player
 
 
 
-
-
-
 Useful website that help me :
 
 [Developer android](https://developer.android.com/index.html)
+
 [Create a music player on android project](https://code.tutsplus.com/tutorials/create-a-music-player-on-android-project-setup--mobile-22764)
