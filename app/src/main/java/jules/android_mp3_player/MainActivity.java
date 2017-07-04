@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,7 +22,11 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private float x1,x2; //position of the finger at the beginning and at the end of the gesture
+
     private ArrayList<Song> songList; // list of song object
+
+    private SongAdapter adapter;
+
     private ListView songView; // listview layout
 
     @Override
@@ -30,11 +35,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         songView = (ListView) findViewById(R.id.song_List); // initialize songView object with listView layout
         songList = new ArrayList<Song>();
+        getSongList(); // fill the list with songs
+        adapter = new SongAdapter(MainActivity.this,songList); // initialize the adapter
+        songView.setAdapter(adapter);
 
         ActivityCompat.requestPermissions(MainActivity.this,
                 new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
-
-
         TextView txtViewSettings = (TextView) findViewById(R.id.textView_Settings);
         TextView txtViewPlaylist = (TextView) findViewById(R.id.textView_Playlist);
 
@@ -49,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 changeToPlaylist();
             }
         });
+
     }
 
     @Override
@@ -108,4 +115,6 @@ public class MainActivity extends AppCompatActivity {
             while (musicCursor.moveToNext());
         }
     }
+
+
 }

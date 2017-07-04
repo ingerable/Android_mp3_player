@@ -56,15 +56,15 @@
 
     <ListView
         android:id="@+id/song_List"
-        android:layout_width="365dp"
-        android:layout_height="405dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="8dp"
+        android:layout_width="354dp"
+        android:layout_height="443dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        />
+
+
 </android.support.constraint.ConstraintLayout>
