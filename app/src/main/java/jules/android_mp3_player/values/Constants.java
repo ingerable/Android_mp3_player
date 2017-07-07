@@ -1,4 +1,4 @@
-package jules.android_mp3_player;
+package jules.android_mp3_player.values;
 
 /**
  * Created by jules97 on 02/07/2017.

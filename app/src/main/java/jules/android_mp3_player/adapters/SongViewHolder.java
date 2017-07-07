@@ -1,4 +1,4 @@
-package jules.android_mp3_player;
+package jules.android_mp3_player.adapters;
 
 import android.widget.TextView;
 

@@ -1,4 +1,4 @@
-package jules.android_mp3_player;
+package jules.android_mp3_player.model;
 
 /**
  * Created by jules97 on 03/07/2017.
@@ -9,11 +9,22 @@ public class Song {
     private String title;
     private String artist;
     private long id;
+    private String path;
 
-    public Song(long id, String title, String artist){
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public Song(long id, String title, String artist, String path){
         this.title = title;
         this.id = id;
         this.artist = artist;
+        this.path = path;
     }
 
     public String getTitle() {
