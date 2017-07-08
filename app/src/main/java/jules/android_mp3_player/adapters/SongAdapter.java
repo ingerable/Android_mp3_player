@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.util.List;
 
 import jules.android_mp3_player.R;
+import jules.android_mp3_player.model.MyMediaPlayer;
 import jules.android_mp3_player.model.Song;
 
 /**
@@ -70,9 +71,9 @@ public class SongAdapter extends ArrayAdapter<Song> {
         if(s.getPath()!=null)
         {
             try {
-                MediaPlayer mp = new MediaPlayer();
-                String fullPath= "file:///"+s.getPath();
-                System.out.println(fullPath);
+                MediaPlayer mp = MyMediaPlayer.getMyMediaPlayer(); // get the mediaPlayer
+                mp.reset();// we are using the same media player, so we have to call reset() to put the mediaPlayer in the iddle State otherwise setDataSource() will throw an error
+                String fullPath= "file:///"+s.getPath(); // building absolute path
                 mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
                 mp.setDataSource(fullPath);
                 mp.prepare();
