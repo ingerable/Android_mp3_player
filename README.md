@@ -7,7 +7,7 @@ Simple mp3 player
 
 
 
-Useful website that help me :
+Useful website that helped me :
 
 [Developer android](https://developer.android.com/index.html)
 
