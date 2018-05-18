@@ -5,9 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-
-import jules.android_mp3_player.Activities.MainActivity;
-import jules.android_mp3_player.Activities.PlaylistsActivity;
 import jules.android_mp3_player.R;
 
 public class SettingsActivity extends AppCompatActivity {

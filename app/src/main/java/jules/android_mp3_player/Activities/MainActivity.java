@@ -34,21 +34,24 @@ public class MainActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
+
+        //permission for read external storage
+        ActivityCompat.requestPermissions(MainActivity.this,
+                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
+
         setContentView(R.layout.activity_main);
 
         ListView songView = (ListView) findViewById(R.id.song_List); // initialize songView object with listView layout
         songList = new ArrayList<Song>();
-        getSongList(); // fill the list with songs
+        this.songList = Song.getSongList(this); // fill the list with songs
         adapter = new SongAdapter(MainActivity.this,songList); // initialize the adapter
         songView.setAdapter(adapter);
 
-        ActivityCompat.requestPermissions(MainActivity.this,
-                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
         TextView txtViewSettings = (TextView) findViewById(R.id.textView_Settings);
         TextView txtViewPlaylist = (TextView) findViewById(R.id.textView_Playlist);
-        final TextView txtViewTitle = (TextView) findViewById(R.id.title); // retrieve the title text view to add an on click event
 
         txtViewSettings.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
@@ -72,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // permission granted and now can proceed
-                    getSongList();
+                    this.songList = Song.getSongList(this);
 
                 } else {
 
@@ -101,29 +104,6 @@ public class MainActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
     }
 
-    public void getSongList(){
-        ContentResolver musicResolver = getContentResolver();
-        Uri musicUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-        String sortOrder = MediaStore.Audio.Media.TITLE + " ASC";
-        Cursor musicCursor = musicResolver.query(musicUri, null, null, null, sortOrder);
 
-        if(musicCursor!=null && musicCursor.moveToFirst()){
-            //retrieve the data we want
-            int titleColumn = musicCursor.getColumnIndex(MediaStore.Audio.Media.TITLE);
-            int idColumn = musicCursor.getColumnIndex(MediaStore.Audio.Media._ID);
-            int artistColumn = musicCursor.getColumnIndex(MediaStore.Audio.Media.ARTIST);
-            int dataColumn = musicCursor.getColumnIndex(MediaStore.Audio.Media.DATA);
-
-            do{
-                //instantiate a song and store it into the songs list
-                long currentId = musicCursor.getLong(idColumn);
-                String currentTitle = musicCursor.getString(titleColumn);
-                String currentArtist = musicCursor.getString(artistColumn);
-                String path = musicCursor.getString(dataColumn);
-                songList.add(new Song(currentId, currentTitle, currentArtist,path));
-            }
-            while (musicCursor.moveToNext());
-        }
-    }
 
 }
